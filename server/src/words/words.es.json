@@ -1,0 +1,37 @@
+{
+  "animals": [
+    "gato", "perro", "elefante", "jirafa", "pingüino", "canguro", "pulpo", "serpiente", "tortuga", "conejo",
+    "león", "tigre", "cebra", "mono", "delfín", "tiburón", "ballena", "búho", "águila", "loro",
+    "rana", "araña", "mariposa", "abeja", "caracol", "cangrejo", "caballo", "vaca", "cerdo", "oveja",
+    "pollo", "pato", "murciélago", "camello", "koala", "oso panda", "zorro", "lobo", "oso", "ardilla"
+  ],
+  "food": [
+    "pizza", "hamburguesa", "plátano", "manzana", "sandía", "helado", "perrito caliente", "sándwich", "pastel", "galleta",
+    "donut", "zanahoria", "brócoli", "queso", "huevo", "pan", "palomitas", "espagueti", "sushi", "taco",
+    "tortita", "cereza", "uvas", "limón", "piña", "fresa", "chocolate", "patatas fritas", "coco", "maíz",
+    "champiñón", "pimiento", "patata", "fideos", "batido", "piruleta", "miel", "aguacate"
+  ],
+  "objects": [
+    "silla", "mesa", "lámpara", "paraguas", "guitarra", "piano", "reloj", "teléfono", "portátil", "cámara",
+    "tijeras", "llave", "candado", "libro", "lápiz", "mochila", "gafas", "sombrero", "zapato", "calcetín",
+    "cepillo de dientes", "escalera", "martillo", "vela", "globo", "cometa", "cohete", "bicicleta", "coche", "avión",
+    "barco", "tren", "televisión", "auriculares", "trofeo", "corona", "espada", "escudo", "robot", "telescopio",
+    "bombilla", "imán", "ancla", "sobre", "cartera"
+  ],
+  "actions": [
+    "dormir", "correr", "nadar", "bailar", "cantar", "saltar", "cocinar", "leer", "escribir", "pintar",
+    "pescar", "escalar", "esquiar", "surfear", "hacer malabares", "estornudar", "bostezar", "llorar", "reír", "volar",
+    "conducir", "patinar", "boxear", "bucear", "caminar", "tejer", "comprar", "saludar", "silbar", "barrer",
+    "cavar", "lanzar", "patear", "rezar"
+  ],
+  "places": [
+    "castillo", "playa", "desierto", "isla", "volcán", "pirámide", "faro", "puente", "escuela", "hospital",
+    "biblioteca", "aeropuerto", "zoo", "granja", "selva", "cueva", "iglú", "museo", "estadio", "circo",
+    "iglesia", "cárcel", "restaurante", "supermercado", "parque infantil", "estación espacial", "tienda de campaña", "molino", "cascada", "puerto"
+  ],
+  "nature": [
+    "sol", "luna", "estrella", "nube", "lluvia", "nieve", "arcoíris", "rayo", "tornado", "montaña",
+    "río", "árbol", "flor", "hoja", "cactus", "rosa", "palmera", "océano", "ola", "fuego",
+    "hielo", "tierra", "cometa", "planeta", "bosque", "girasol", "iceberg", "muñeco de nieve", "charco", "seta"
+  ]
+}

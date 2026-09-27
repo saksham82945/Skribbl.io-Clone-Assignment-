@@ -1,0 +1,38 @@
+{
+  "animals": [
+    "cat", "dog", "elephant", "giraffe", "penguin", "kangaroo", "octopus", "snake", "turtle", "rabbit",
+    "lion", "tiger", "zebra", "monkey", "dolphin", "shark", "whale", "owl", "eagle", "parrot",
+    "frog", "spider", "butterfly", "bee", "snail", "crab", "horse", "cow", "pig", "sheep",
+    "chicken", "duck", "bat", "camel", "koala", "panda", "fox", "wolf", "bear", "squirrel",
+    "jellyfish", "flamingo", "peacock", "hedgehog", "crocodile"
+  ],
+  "food": [
+    "pizza", "burger", "banana", "apple", "watermelon", "ice cream", "hot dog", "sandwich", "cake", "cookie",
+    "donut", "carrot", "broccoli", "cheese", "egg", "bread", "popcorn", "spaghetti", "sushi", "taco",
+    "pancake", "cherry", "grapes", "lemon", "pineapple", "strawberry", "chocolate", "french fries", "cupcake", "coconut",
+    "corn", "mushroom", "pepper", "potato", "noodles", "milkshake", "lollipop", "honey", "pretzel", "avocado"
+  ],
+  "objects": [
+    "chair", "table", "lamp", "umbrella", "guitar", "piano", "clock", "phone", "laptop", "camera",
+    "scissors", "key", "lock", "book", "pencil", "backpack", "glasses", "hat", "shoe", "sock",
+    "toothbrush", "ladder", "hammer", "candle", "balloon", "kite", "rocket", "bicycle", "car", "airplane",
+    "boat", "train", "television", "headphones", "trophy", "crown", "sword", "shield", "robot", "telescope",
+    "light bulb", "magnet", "anchor", "envelope", "wallet"
+  ],
+  "actions": [
+    "sleeping", "running", "swimming", "dancing", "singing", "jumping", "cooking", "reading", "writing", "painting",
+    "fishing", "climbing", "skiing", "surfing", "juggling", "sneezing", "yawning", "crying", "laughing", "flying",
+    "driving", "skating", "boxing", "bowling", "diving", "hiking", "knitting", "shopping", "waving", "whistling",
+    "sweeping", "digging", "throwing", "kicking", "praying"
+  ],
+  "places": [
+    "castle", "beach", "desert", "island", "volcano", "pyramid", "lighthouse", "bridge", "school", "hospital",
+    "library", "airport", "zoo", "farm", "jungle", "cave", "igloo", "museum", "stadium", "circus",
+    "church", "prison", "restaurant", "supermarket", "playground", "space station", "tent", "windmill", "waterfall", "harbor"
+  ],
+  "nature": [
+    "sun", "moon", "star", "cloud", "rain", "snow", "rainbow", "lightning", "tornado", "mountain",
+    "river", "tree", "flower", "leaf", "cactus", "mushroom", "rose", "palm tree", "ocean", "wave",
+    "fire", "ice", "earth", "comet", "planet", "forest", "sunflower", "iceberg", "snowman", "puddle"
+  ]
+}

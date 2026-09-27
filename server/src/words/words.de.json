@@ -1,0 +1,37 @@
+{
+  "animals": [
+    "katze", "hund", "elefant", "giraffe", "pinguin", "känguru", "oktopus", "schlange", "schildkröte", "hase",
+    "löwe", "tiger", "zebra", "affe", "delfin", "hai", "wal", "eule", "adler", "papagei",
+    "frosch", "spinne", "schmetterling", "biene", "schnecke", "krabbe", "pferd", "kuh", "schwein", "schaf",
+    "huhn", "ente", "fledermaus", "kamel", "koala", "panda", "fuchs", "wolf", "bär", "eichhörnchen"
+  ],
+  "food": [
+    "pizza", "burger", "banane", "apfel", "wassermelone", "eis", "hotdog", "sandwich", "kuchen", "keks",
+    "donut", "karotte", "brokkoli", "käse", "ei", "brot", "popcorn", "spaghetti", "sushi", "taco",
+    "pfannkuchen", "kirsche", "trauben", "zitrone", "ananas", "erdbeere", "schokolade", "pommes", "kokosnuss", "mais",
+    "pilz", "paprika", "kartoffel", "nudeln", "milchshake", "lutscher", "honig", "avocado", "brezel"
+  ],
+  "objects": [
+    "stuhl", "tisch", "lampe", "regenschirm", "gitarre", "klavier", "uhr", "handy", "laptop", "kamera",
+    "schere", "schlüssel", "schloss", "buch", "bleistift", "rucksack", "brille", "hut", "schuh", "socke",
+    "zahnbürste", "leiter", "hammer", "kerze", "luftballon", "drachen", "rakete", "fahrrad", "auto", "flugzeug",
+    "boot", "zug", "fernseher", "kopfhörer", "pokal", "krone", "schwert", "schild", "roboter", "teleskop",
+    "glühbirne", "magnet", "anker", "briefumschlag", "geldbeutel"
+  ],
+  "actions": [
+    "schlafen", "rennen", "schwimmen", "tanzen", "singen", "springen", "kochen", "lesen", "schreiben", "malen",
+    "angeln", "klettern", "skifahren", "surfen", "jonglieren", "niesen", "gähnen", "weinen", "lachen", "fliegen",
+    "autofahren", "skaten", "boxen", "kegeln", "tauchen", "wandern", "stricken", "einkaufen", "winken", "pfeifen",
+    "fegen", "graben", "werfen", "kicken", "beten"
+  ],
+  "places": [
+    "burg", "strand", "wüste", "insel", "vulkan", "pyramide", "leuchtturm", "brücke", "schule", "krankenhaus",
+    "bibliothek", "flughafen", "zoo", "bauernhof", "dschungel", "höhle", "iglu", "museum", "stadion", "zirkus",
+    "kirche", "gefängnis", "restaurant", "supermarkt", "spielplatz", "raumstation", "zelt", "windmühle", "wasserfall", "hafen"
+  ],
+  "nature": [
+    "sonne", "mond", "stern", "wolke", "regen", "schnee", "regenbogen", "blitz", "tornado", "berg",
+    "fluss", "baum", "blume", "blatt", "kaktus", "rose", "palme", "ozean", "welle", "feuer",
+    "eis", "erde", "komet", "planet", "wald", "sonnenblume", "eisberg", "schneemann", "pfütze"
+  ]
+}

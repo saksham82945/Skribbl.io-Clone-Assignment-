@@ -1,0 +1,37 @@
+{
+  "animals": [
+    "billi", "kutta", "haathi", "jiraffe", "penguin", "kangaroo", "octopus", "saanp", "kachhua", "khargosh",
+    "sher", "baagh", "zebra", "bandar", "dolphin", "shark", "whale", "ullu", "cheel", "tota",
+    "mendak", "makdi", "titli", "madhumakhi", "ghongha", "kekda", "ghoda", "gaay", "suar", "bhed",
+    "murgi", "batakh", "chamgadar", "oont", "koala", "panda", "lomdi", "bhediya", "bhalu", "gilhari", "mor"
+  ],
+  "food": [
+    "pizza", "burger", "kela", "seb", "tarbooz", "ice cream", "samosa", "sandwich", "cake", "biscuit",
+    "jalebi", "gajar", "gobhi", "paneer", "anda", "roti", "popcorn", "noodles", "dosa", "idli",
+    "paratha", "cherry", "angoor", "nimbu", "ananas", "strawberry", "chocolate", "french fries", "nariyal", "bhutta",
+    "mushroom", "mirch", "aloo", "maggi", "lassi", "lollipop", "shahad", "aam", "chai", "laddu", "golgappa"
+  ],
+  "objects": [
+    "kursi", "mez", "lamp", "chhata", "guitar", "piano", "ghadi", "phone", "laptop", "camera",
+    "kainchi", "chaabi", "taala", "kitaab", "pencil", "bag", "chashma", "topi", "joota", "moza",
+    "toothbrush", "seedhi", "hathoda", "mombatti", "gubbara", "patang", "rocket", "cycle", "gaadi", "hawai jahaz",
+    "naav", "train", "tv", "headphone", "trophy", "taj", "talwar", "dhaal", "robot", "doorbeen",
+    "bulb", "chumbak", "langar", "lifafa", "batua", "auto rickshaw", "cricket bat"
+  ],
+  "actions": [
+    "sona", "daudna", "tairna", "naachna", "gaana", "koodna", "khana banana", "padhna", "likhna", "painting",
+    "machli pakadna", "chadhna", "skiing", "surfing", "juggling", "chheenkna", "jamhai", "rona", "hasna", "udna",
+    "gaadi chalana", "skating", "boxing", "cricket khelna", "tairna", "ghoomna", "bunai", "shopping", "haath hilana", "seeti bajana",
+    "jhadu lagana", "khodna", "phenkna", "kick marna", "pooja karna", "yoga"
+  ],
+  "places": [
+    "kila", "samundar kinara", "registan", "tapu", "jwalamukhi", "pyramid", "lighthouse", "pul", "school", "hospital",
+    "library", "airport", "chidiyaghar", "khet", "jungle", "gufa", "igloo", "museum", "stadium", "circus",
+    "mandir", "jail", "restaurant", "bazaar", "park", "space station", "tambu", "pawan chakki", "jharna", "bandargah", "taj mahal"
+  ],
+  "nature": [
+    "suraj", "chaand", "taara", "baadal", "baarish", "barf", "indradhanush", "bijli", "toofan", "pahad",
+    "nadi", "ped", "phool", "patta", "cactus", "gulab", "nariyal ka ped", "samundar", "lehar", "aag",
+    "barf", "dharti", "dhoomketu", "grah", "jungle", "surajmukhi", "iceberg", "snowman", "gaddha", "kamal"
+  ]
+}
