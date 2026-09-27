@@ -107,7 +107,7 @@ Full event list: see `ClientToServerEvents` / `ServerToClientEvents` in `shared/
 ## 3b. Automatic players (always a 4-player game)
 
 - **Every room is topped up to 4 players** (`timing.targetPlayers`, capped by the room's max players). `Room.balanceBots()` runs whenever a real player joins or leaves, or the settings change.
-  - **Filling up:** automatic players join one at a time, about 0.c75–2.25 s apart, with a normal "X joined the room" message.
+  - **Filling up:** automatic players join one at a time, about 0.75–2.25 s apart, with a normal "X joined the room" message.
   - **Making room:** when a real player arrives, an automatic player leaves ("X left the room"). The current drawer is never the one picked to leave.
   - A room closes as soon as no real players are left.
 - **They look like real players.** A bot is an ordinary `Player` with `isBot = true` and no socket, but `isBot` is **never sent to clients**. `PlayerDTO` has no such field, and bots get ordinary usernames (`priya_22`, `Liam`, `noah_draws`…) and random avatars. Bots are always "connected" and ready, and they count for turn order, scoring and "everyone guessed".
