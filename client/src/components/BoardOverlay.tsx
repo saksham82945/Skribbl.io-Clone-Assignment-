@@ -50,7 +50,7 @@ export function BoardOverlay() {
           </>
         ) : (
           <>
-            {drawer && <Avatar avatar={drawer.avatar} size={72} />}
+            {drawer && <Avatar avatar={drawer.avatar} size={72} animated />}
             <h2>{drawer?.name ?? 'Someone'} is choosing a word…</h2>
           </>
         )}
@@ -86,7 +86,7 @@ export function BoardOverlay() {
         <div className="podium">
           {podium.map((e) => (
             <div key={e.playerId} className={`podium-place place-${e.rank}`}>
-              <Avatar avatar={e.avatar} size={e.rank === 1 ? 72 : 56} />
+              <Avatar avatar={e.avatar} size={e.rank === 1 ? 72 : 56} animated />
               <b>#{e.rank} {e.name}</b>
               <span>{e.score} pts</span>
             </div>

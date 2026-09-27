@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { AckResult, JoinResult, PublicRoomInfo } from '../shared/types';
-import { AVATAR_COLORS, AVATAR_EMOJIS } from '../shared/types';
+import type { AckResult, Avatar as AvatarT, JoinResult, PublicRoomInfo } from '../shared/types';
+import { AVATAR_COLORS } from '../shared/types';
 import { Avatar } from '../components/Avatar';
 import { ProfileForm } from '../components/ProfileForm';
 import { extractCode } from '../lib/roomCode';
@@ -9,6 +9,18 @@ import { socket } from '../lib/socket';
 import { createRoom, quickPlay, showToast, useStore } from '../lib/store';
 
 const LOGO = 'scribble.io'.split('');
+
+/** A few example looks under the logo, showing off patterns, hats and effects. */
+const SHOWCASE: AvatarT[] = [
+  { emoji: '😎', color: AVATAR_COLORS[0], pattern: 'gradient', accessory: 'crown', effect: 'bounce' },
+  { emoji: '🦊', color: AVATAR_COLORS[1], pattern: 'dots', accessory: 'none', effect: 'wiggle' },
+  { emoji: '🐸', color: AVATAR_COLORS[3], pattern: 'stripes', accessory: 'tophat', effect: 'float' },
+  { emoji: '🦄', color: AVATAR_COLORS[9], pattern: 'rainbow', accessory: 'sparkles', effect: 'pulse' },
+  { emoji: '🤖', color: AVATAR_COLORS[7], pattern: 'ring', accessory: 'headphones', effect: 'float' },
+  { emoji: '🐼', color: AVATAR_COLORS[14], pattern: 'solid', accessory: 'bow', effect: 'bounce' },
+  { emoji: '🧙', color: AVATAR_COLORS[8], pattern: 'gradient', accessory: 'none', effect: 'spin' },
+  { emoji: '🐙', color: AVATAR_COLORS[10], pattern: 'dots', accessory: 'cap', effect: 'wiggle' },
+];
 const LOGO_COLORS = ['#f94144', '#f3722c', '#f9c74f', '#90be6d', '#43aa8b', '#4d908e', '#577590', '#277da1', '#9b5de5', '#f15bb5', '#f94144'];
 
 export function Home() {
@@ -55,8 +67,8 @@ export function Home() {
         </span>
       </h1>
       <div className="avatar-row" aria-hidden>
-        {AVATAR_EMOJIS.slice(0, 8).map((e, i) => (
-          <Avatar key={e} avatar={{ emoji: e, color: AVATAR_COLORS[i] }} size={40} />
+        {SHOWCASE.map((a, i) => (
+          <Avatar key={i} avatar={a} size={40} animated />
         ))}
       </div>
 

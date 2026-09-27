@@ -95,7 +95,7 @@ All values are clamped on the server, whatever the client sends (`utils/sanitize
 | Word modes: Normal, Hidden, Combination | ✅ |
 | Moderation: kick, ban, votekick, report | ✅ player **⋯** menu: Kick / Ban (host), Vote kick, Report, plus a local-only **Mute** |
 | Custom word list | ✅ |
-| Avatars | ✅ (face + colour, 🎲 randomizer) |
+| Avatars | ✅ customiser with 48 faces, 16 colours, 6 patterns, 8 hats and 5 idle animations; slot-machine 🎲 randomizer, fun-name 🎲, animated picker; shown in the lobby, game and podium |
 | Spectator mode | ✅ (**Watch** from the public list, or tick "Just watch" on an invite link) |
 | Replay last round's drawing | ✅ (**▶** in the top bar re-animates the previous turn) |
 
@@ -136,7 +136,7 @@ Click **Play!** and automatic players fill the room so you can play straight awa
 
 ## Testing
 
-**125 automated tests** run in CI on every push (`.github/workflows/ci.yml`: typecheck → test → build).
+**138 automated tests** run in CI on every push (`.github/workflows/ci.yml`: typecheck → test → build).
 
 | Suite | Kind | What it covers |
 |---|---|---|

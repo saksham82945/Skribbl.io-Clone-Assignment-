@@ -1,4 +1,5 @@
-import { AVATAR_COLORS, AVATAR_EMOJIS } from '../shared/types';
+import { AVATAR_ACCESSORIES, AVATAR_COLORS, AVATAR_EFFECTS, AVATAR_EMOJIS, AVATAR_PATTERNS } from '../shared/types';
+import { sanitizeAvatar } from '../utils/sanitize';
 import { Player } from '../models/Player';
 import type { Room } from '../models/Room';
 import { BOT_DRAWINGS, BOT_WORDS, type BotStroke } from './drawings';
@@ -44,7 +45,15 @@ export class BotController {
     const taken = new Set([...this.room.players.values()].map((p) => p.name.toLowerCase()));
     const free = BOT_NAMES.filter((n) => !taken.has(n.toLowerCase()));
     const name = free.length ? pick(free) : `player${Math.floor(100 + Math.random() * 900)}`;
-    return new Player(name, { color: pick(AVATAR_COLORS), emoji: pick(AVATAR_EMOJIS) }, null, true);
+    // Varied looks, like real players customising their avatar (about half wear something).
+    const avatar = sanitizeAvatar({
+      color: pick(AVATAR_COLORS),
+      emoji: pick(AVATAR_EMOJIS),
+      pattern: pick(AVATAR_PATTERNS).id,
+      accessory: Math.random() < 0.5 ? pick(AVATAR_ACCESSORIES).id : 'none',
+      effect: Math.random() < 0.4 ? pick(AVATAR_EFFECTS).id : 'none',
+    });
+    return new Player(name, avatar, null, true);
   }
 
   // ---------- game hooks ----------

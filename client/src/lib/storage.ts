@@ -1,4 +1,5 @@
-import { AVATAR_COLORS, AVATAR_EMOJIS, type Avatar } from '../shared/types';
+import { normalizeAvatar } from './avatar';
+import type { Avatar } from '../shared/types';
 
 export interface Profile {
   name: string;
@@ -27,10 +28,11 @@ function write(key: string, value: unknown, store: () => Storage = () => localSt
   }
 }
 
-const pick = <T,>(arr: readonly T[]) => arr[Math.floor(Math.random() * arr.length)];
 
 export function loadProfile(): Profile {
-  return read<Profile>(PROFILE_KEY) ?? { name: '', avatar: { color: pick(AVATAR_COLORS), emoji: pick(AVATAR_EMOJIS) } };
+  const saved = read<Partial<Profile>>(PROFILE_KEY);
+  // normalizeAvatar upgrades profiles saved before patterns/hats/effects existed.
+  return { name: typeof saved?.name === 'string' ? saved.name : '', avatar: normalizeAvatar(saved?.avatar) };
 }
 
 export const saveProfile = (p: Profile) => write(PROFILE_KEY, p);

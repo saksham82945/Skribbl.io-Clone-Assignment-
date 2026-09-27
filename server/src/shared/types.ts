@@ -15,10 +15,61 @@ export type Tool = 'brush' | 'eraser' | 'fill';
 export interface Avatar {
   color: string;
   emoji: string;
+  /** Background style of the avatar bubble (see AVATAR_PATTERNS). */
+  pattern?: AvatarPattern;
+  /** Something worn on top (see AVATAR_ACCESSORIES). */
+  accessory?: AvatarAccessory;
+  /** Idle animation shown in the picker, lobby and results (see AVATAR_EFFECTS). */
+  effect?: AvatarEffect;
 }
 
-export const AVATAR_EMOJIS = ['😀', '😎', '🤓', '🥳', '😺', '🐶', '🦊', '🐼', '🐸', '🐵', '🦄', '🐙', '👻', '🤖', '👽', '🎃'];
-export const AVATAR_COLORS = ['#f94144', '#f3722c', '#f9c74f', '#90be6d', '#43aa8b', '#4d908e', '#577590', '#277da1', '#9b5de5', '#f15bb5'];
+export const AVATAR_EMOJI_GROUPS = [
+  { label: 'Faces', emojis: ['😀', '😎', '🤓', '🥳', '😂', '😇', '🤠', '🥸', '😴', '🤯', '😈', '🤡'] },
+  { label: 'Animals', emojis: ['😺', '🐶', '🦊', '🐼', '🐸', '🐵', '🐯', '🦁', '🐨', '🐷', '🐧', '🦉', '🐢', '🐙', '🦖', '🐳'] },
+  { label: 'Fantasy', emojis: ['🦄', '👻', '🤖', '👽', '🎃', '🧙', '🧛', '🐲'] },
+  { label: 'Food', emojis: ['🍕', '🍩', '🥑', '🍉', '🧁', '🌮'] },
+  { label: 'Fun', emojis: ['⚽', '🎸', '🚀', '🌈', '⭐', '🔥'] },
+] as const;
+export const AVATAR_EMOJIS: readonly string[] = AVATAR_EMOJI_GROUPS.flatMap((g) => g.emojis);
+
+export const AVATAR_COLORS = [
+  '#f94144', '#f3722c', '#f9c74f', '#90be6d', '#43aa8b', '#4d908e', '#577590', '#277da1',
+  '#9b5de5', '#f15bb5', '#00bbf9', '#00f5d4', '#ff99c8', '#fcf6bd', '#a0c4ff', '#2b2d42',
+];
+
+export const AVATAR_PATTERNS = [
+  { id: 'solid', label: 'Solid' },
+  { id: 'gradient', label: 'Gradient' },
+  { id: 'stripes', label: 'Stripes' },
+  { id: 'dots', label: 'Dots' },
+  { id: 'rainbow', label: 'Rainbow' },
+  { id: 'ring', label: 'Ring' },
+] as const;
+export type AvatarPattern = (typeof AVATAR_PATTERNS)[number]['id'];
+
+/** `slot` says where the item sits on the avatar. */
+export const AVATAR_ACCESSORIES = [
+  { id: 'none', emoji: '', label: 'None', slot: 'top' },
+  { id: 'crown', emoji: '👑', label: 'Crown', slot: 'top' },
+  { id: 'tophat', emoji: '🎩', label: 'Top hat', slot: 'top' },
+  { id: 'cap', emoji: '🧢', label: 'Cap', slot: 'top' },
+  { id: 'grad', emoji: '🎓', label: 'Grad cap', slot: 'top' },
+  { id: 'bow', emoji: '🎀', label: 'Bow', slot: 'corner' },
+  { id: 'flower', emoji: '🌸', label: 'Flower', slot: 'corner' },
+  { id: 'headphones', emoji: '🎧', label: 'Headphones', slot: 'top' },
+  { id: 'sparkles', emoji: '✨', label: 'Sparkles', slot: 'corner' },
+] as const;
+export type AvatarAccessory = (typeof AVATAR_ACCESSORIES)[number]['id'];
+
+export const AVATAR_EFFECTS = [
+  { id: 'none', label: 'None' },
+  { id: 'bounce', label: 'Bounce' },
+  { id: 'wiggle', label: 'Wiggle' },
+  { id: 'float', label: 'Float' },
+  { id: 'spin', label: 'Spin' },
+  { id: 'pulse', label: 'Pulse' },
+] as const;
+export type AvatarEffect = (typeof AVATAR_EFFECTS)[number]['id'];
 
 export interface RoomSettings {
   maxPlayers: number;

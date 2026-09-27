@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_SETTINGS } from '../src/shared/types';
 import { effectiveHintCount, hintSchedule, maskWord, pickLetterToReveal } from '../src/utils/hints';
-import { sanitizeSettings } from '../src/utils/sanitize';
+import { sanitizeAvatar, sanitizeSettings } from '../src/utils/sanitize';
 import { drawerPoints, guesserPoints } from '../src/utils/scoring';
 import { checkGuess, containsWord, normalize } from '../src/utils/wordMatch';
 import { WordBank } from '../src/words/WordBank';
@@ -72,6 +72,24 @@ describe('scoring', () => {
     expect(drawerPoints(0, 3)).toBe(0);
     expect(drawerPoints(3, 3)).toBe(250);
     expect(drawerPoints(1, 2)).toBe(125);
+  });
+});
+
+describe('avatars', () => {
+  it('keeps valid patterns, hats and effects', () => {
+    const a = sanitizeAvatar({ color: '#00bbf9', emoji: '🦖', pattern: 'rainbow', accessory: 'crown', effect: 'bounce' });
+    expect(a).toEqual({ color: '#00bbf9', emoji: '🦖', pattern: 'rainbow', accessory: 'crown', effect: 'bounce' });
+  });
+
+  it('replaces anything not on the published lists with safe defaults', () => {
+    const a = sanitizeAvatar({ color: 'red;}', emoji: '<img>', pattern: 'url(evil)', accessory: '💣', effect: 'crash' });
+    expect(a.color).toMatch(/^#[0-9a-f]{6}$/i);
+    expect(a.emoji).not.toBe('<img>');
+    expect(a).toMatchObject({ pattern: 'solid', accessory: 'none', effect: 'none' });
+  });
+
+  it('upgrades old two-field avatars', () => {
+    expect(sanitizeAvatar({ color: '#f94144', emoji: '😀' })).toEqual({ color: '#f94144', emoji: '😀', pattern: 'solid', accessory: 'none', effect: 'none' });
   });
 });
 

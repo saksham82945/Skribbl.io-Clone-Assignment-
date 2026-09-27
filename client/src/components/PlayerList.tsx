@@ -97,7 +97,8 @@ export function PlayerList({ ranked }: { ranked: boolean }) {
             {mutedIds.has(p.id) && <span title="Muted">🔇</span>}
             {!p.isConnected && <span title="Disconnected">📡</span>}
           </span>
-          <Avatar avatar={p.avatar} size={40} />
+          {/* Idle effects play in the lobby; during a game the list stays still so it isn't distracting. */}
+          <Avatar avatar={p.avatar} size={40} animated={!ranked} />
           {p.id !== myId && (
             <button
               className="kick-btn"

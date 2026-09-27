@@ -1,6 +1,9 @@
 import {
+  AVATAR_ACCESSORIES,
   AVATAR_COLORS,
+  AVATAR_EFFECTS,
   AVATAR_EMOJIS,
+  AVATAR_PATTERNS,
   DEFAULT_SETTINGS,
   LANGUAGES,
   SETTINGS_LIMITS,
@@ -41,11 +44,18 @@ export function sanitizeText(text: unknown, max = 100): string {
     .slice(0, max);
 }
 
+const oneOf = <T extends string>(value: unknown, allowed: readonly { id: T }[], fallback: T): T =>
+  allowed.some((o) => o.id === value) ? (value as T) : fallback;
+
+/** Only values from the published lists are accepted, so nobody can inject arbitrary content. */
 export function sanitizeAvatar(avatar: unknown): Avatar {
   const a = (avatar ?? {}) as Partial<Avatar>;
   return {
     color: typeof a.color === 'string' && HEX.test(a.color) ? a.color : AVATAR_COLORS[0],
     emoji: typeof a.emoji === 'string' && AVATAR_EMOJIS.includes(a.emoji) ? a.emoji : AVATAR_EMOJIS[0],
+    pattern: oneOf(a.pattern, AVATAR_PATTERNS, 'solid'),
+    accessory: oneOf(a.accessory, AVATAR_ACCESSORIES, 'none'),
+    effect: oneOf(a.effect, AVATAR_EFFECTS, 'none'),
   };
 }
 

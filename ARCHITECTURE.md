@@ -166,7 +166,7 @@ Full event list: see `ClientToServerEvents` / `ServerToClientEvents` in `server/
 
 ## 7. Testing
 
-125 automated tests, run by `npm test` and in CI (`.github/workflows/ci.yml`).
+138 automated tests, run by `npm test` and in CI (`.github/workflows/ci.yml`).
 
 - **Server unit tests** (`server/tests/*.unit.test.ts`, `utils.test.ts`) drive `Room` and `Game` directly through a `FakeIO` that records every emit (`tests/helpers.ts`), with Vitest fake timers controlling the clock. They cover:
   - every phase transition, auto-pick, the hint schedule, time-up vs all-guessed, scoring order and the drawer's share
