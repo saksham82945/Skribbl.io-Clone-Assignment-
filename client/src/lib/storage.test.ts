@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clearSession, loadProfile, loadSession, saveProfile, saveSession } from './storage';
+import { clearSession, getDeviceId, loadProfile, loadSession, saveProfile, saveSession } from './storage';
 
 describe('storage', () => {
   it('gives a new visitor an empty name and a random valid avatar', () => {
@@ -20,6 +20,13 @@ describe('storage', () => {
     expect(loadSession('OTHER1')).toBeNull();
     clearSession('ROOM01');
     expect(loadSession('ROOM01')).toBeNull();
+  });
+
+  it('gives each browser one stable device id (used only for bans)', () => {
+    const id = getDeviceId();
+    expect(id).toMatch(/^[0-9a-f]{32}$/);
+    expect(getDeviceId()).toBe(id);
+    expect(localStorage.getItem('scribble:device')).toBe(JSON.stringify(id));
   });
 
   it('survives corrupted storage', () => {

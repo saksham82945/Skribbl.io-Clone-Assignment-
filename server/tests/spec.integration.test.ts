@@ -221,6 +221,38 @@ describe('Spec: moderation, spectators, languages', () => {
     expect(again.ok).toBe(false);
   });
 
+  it('host ban keeps that browser out, even from a new tab; a kick does not', async () => {
+    const host = connect();
+    const room = ok(await host.emitWithAck('create_room', { hostName: 'Host', avatar, deviceId: 'host-device-0001' }));
+
+    const kickedTab = connect();
+    const kicked = ok(await kickedTab.emitWithAck('join_room', { roomId: room.roomId, playerName: 'Kicked', avatar, deviceId: 'kick-device-0001' }));
+    host.emit('kick_player', { playerId: kicked.playerId });
+    await recorder(kickedTab).next('kicked');
+    const rejoin = await connect().emitWithAck('join_room', { roomId: room.roomId, playerName: 'Kicked', avatar, deviceId: 'kick-device-0001' });
+    expect(rejoin.ok).toBe(true); // kicked players may come back
+
+    const bannedTab = connect();
+    const b = recorder(bannedTab);
+    const banned = ok(await bannedTab.emitWithAck('join_room', { roomId: room.roomId, playerName: 'Banned', avatar, deviceId: 'ban-device-00001' }));
+    host.emit('kick_player', { playerId: banned.playerId, ban: true });
+    expect((await b.next('kicked')).reason).toMatch(/banned/i);
+
+    // New tab, no token, same browser → refused. A different browser is fine.
+    const again = await connect().emitWithAck('join_room', { roomId: room.roomId, playerName: 'Banned', avatar, deviceId: 'ban-device-00001' });
+    expect(again).toEqual({ ok: false, error: 'You are banned from this room.' });
+    const other = await connect().emitWithAck('join_room', { roomId: room.roomId, playerName: 'Someone', avatar, deviceId: 'other-device-001' });
+    expect(other.ok).toBe(true);
+
+    // Only the host can ban.
+    const guest = connect();
+    const gr = recorder(guest);
+    const guestSeat = ok(await guest.emitWithAck('join_room', { roomId: room.roomId, playerName: 'Guest', avatar, deviceId: 'guest-device-001' }));
+    guest.emit('kick_player', { playerId: room.playerId, ban: true });
+    expect((await gr.next('error_message')).message).toMatch(/host/i);
+    expect(guestSeat.ok).toBe(true);
+  });
+
   it('report_player is acknowledged privately', async () => {
     const host = connect();
     const room = ok(await host.emitWithAck('create_room', { hostName: 'Host', avatar }));

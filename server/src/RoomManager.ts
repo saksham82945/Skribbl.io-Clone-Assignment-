@@ -42,8 +42,10 @@ export class RoomManager {
    * "Play!": join the public room with the most real people (automatic players
    * make way), or open a new one — it fills itself up to 4 players.
    */
-  findOrCreatePublic(): Room {
-    const open = [...this.rooms.values()].filter((r) => !r.settings.isPrivate && r.humans.length < r.settings.maxPlayers);
+  findOrCreatePublic(deviceId?: string): Room {
+    const open = [...this.rooms.values()].filter(
+      (r) => !r.settings.isPrivate && r.humans.length < r.settings.maxPlayers && !r.isDeviceBanned(deviceId),
+    );
     open.sort((a, b) => b.humans.length - a.humans.length || Number(b.game.phase === 'lobby') - Number(a.game.phase === 'lobby'));
     return open[0] ?? this.create({ isPrivate: false });
   }

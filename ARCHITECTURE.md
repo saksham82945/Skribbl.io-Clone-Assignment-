@@ -139,7 +139,8 @@ Full event list: see `ClientToServerEvents` / `ServerToClientEvents` in `server/
 
 - **Spectators** (`join_room { spectator: true }`) are `Player`s with `isSpectator`. They don't take a seat (`Room.isFull` counts active players only) and never enter the draw queue. They're skipped when checking "everyone guessed" and left off the leaderboard. They can chat, but a message containing the word is dropped so they can't leak it.
 - **Moderation:**
-  - **Kick:** the host kicks a player, and that seat's token is banned, so the old tab can't silently rejoin.
+  - **Kick:** the host removes a player. Their seat token is blocked, so the old tab can't silently reclaim the seat, but they may join again.
+  - **Ban:** the host removes a player *and* blocks their browser from the room. Each browser sends a random `deviceId` (localStorage) when joining; a banned one is refused even from a new tab. **Play!** never matches a browser into a room that banned it.
   - **Vote kick:** a majority of the other players removes someone.
   - **Report:** logged on the server; the reporter gets a private acknowledgement.
   - **Mute:** purely client-side. It hides that player's chat for you only.
@@ -165,7 +166,7 @@ Full event list: see `ClientToServerEvents` / `ServerToClientEvents` in `server/
 
 ## 7. Testing
 
-122 automated tests, run by `npm test` and in CI (`.github/workflows/ci.yml`).
+125 automated tests, run by `npm test` and in CI (`.github/workflows/ci.yml`).
 
 - **Server unit tests** (`server/tests/*.unit.test.ts`, `utils.test.ts`) drive `Room` and `Game` directly through a `FakeIO` that records every emit (`tests/helpers.ts`), with Vitest fake timers controlling the clock. They cover:
   - every phase transition, auto-pick, the hint schedule, time-up vs all-guessed, scoring order and the drawer's share

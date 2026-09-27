@@ -4,7 +4,7 @@ import { Player } from './models/Player';
 import type { Room } from './models/Room';
 import type { RoomManager } from './RoomManager';
 import type { IOSocket } from './types';
-import { sanitizeAvatar, sanitizeName, sanitizeText } from './utils/sanitize';
+import { sanitizeAvatar, sanitizeDeviceId, sanitizeName, sanitizeText } from './utils/sanitize';
 
 /**
  * Translates socket events into Room / Game method calls.
@@ -19,7 +19,7 @@ export class MessageHandler {
     socket.on('create_room', (p, ack) =>
       this.safe(socket, () => {
         const room = this.rooms.create({ ...p?.settings });
-        this.join(socket, room, p?.hostName, p?.avatar, undefined, ack);
+        this.join(socket, room, p?.hostName, p?.avatar, undefined, ack, false, p?.deviceId);
       }, ack),
     );
 
@@ -27,12 +27,15 @@ export class MessageHandler {
       this.safe(socket, () => {
         const room = this.rooms.get(p?.roomId);
         if (!room) return reply(ack, 'Room not found. Check the code or link.');
-        this.join(socket, room, p.playerName, p.avatar, p.token, ack, !!p.spectator);
+        this.join(socket, room, p.playerName, p.avatar, p.token, ack, !!p.spectator, p.deviceId);
       }, ack),
     );
 
     socket.on('quick_play', (p, ack) =>
-      this.safe(socket, () => this.join(socket, this.rooms.findOrCreatePublic(), p?.playerName, p?.avatar, undefined, ack), ack),
+      this.safe(socket, () => {
+        const deviceId = sanitizeDeviceId(p?.deviceId);
+        this.join(socket, this.rooms.findOrCreatePublic(deviceId), p?.playerName, p?.avatar, undefined, ack, false, deviceId);
+      }, ack),
     );
 
     socket.on('get_public_rooms', (ack) => typeof ack === 'function' && ack(this.rooms.listPublic()));
@@ -96,7 +99,7 @@ export class MessageHandler {
     // ---------- moderation ----------
     socket.on('kick_player', (p) =>
       this.withHost(socket, (room, host) => {
-        if (p?.playerId && p.playerId !== host.id) room.removePlayer(p.playerId, 'kicked');
+        if (p?.playerId && p.playerId !== host.id) room.removePlayer(p.playerId, p.ban ? 'banned' : 'kicked');
       }),
     );
     socket.on('report_player', (p) =>
@@ -111,7 +114,17 @@ export class MessageHandler {
     });
   }
 
-  private join(socket: IOSocket, room: Room, name: unknown, avatar: unknown, token: string | undefined, ack: Ack<JoinResult>, spectator = false) {
+  private join(
+    socket: IOSocket,
+    room: Room,
+    name: unknown,
+    avatar: unknown,
+    token: string | undefined,
+    ack: Ack<JoinResult>,
+    spectator = false,
+    rawDeviceId?: unknown,
+  ) {
+    const deviceId = sanitizeDeviceId(rawDeviceId);
     if (typeof ack !== 'function') return;
     if (socket.data.roomId === room.id && socket.data.playerId && room.players.has(socket.data.playerId)) {
       const me = room.players.get(socket.data.playerId)!;
@@ -119,6 +132,7 @@ export class MessageHandler {
     }
     this.leave(socket);
 
+    if (room.isDeviceBanned(deviceId)) return reply(ack, 'You are banned from this room.');
     if (room.isBanned(token)) return reply(ack, 'You were kicked from this room.');
 
     // Reclaim a seat after refresh / network drop.
@@ -138,6 +152,7 @@ export class MessageHandler {
     if (!spectator && room.isFull && !room.evictBot()) return reply(ack, 'This room is full.');
 
     const player = new Player(sanitizeName(name), sanitizeAvatar(avatar as Avatar), socket.id, false, spectator);
+    player.deviceId = deviceId;
     socket.join(room.id);
     socket.data = { roomId: room.id, playerId: player.id };
     ack({ ok: true, roomId: room.id, playerId: player.id, token: player.token });

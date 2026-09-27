@@ -34,6 +34,7 @@ describe('PlayerList', () => {
     const host = render(<PlayerList ranked={false} />);
     fireEvent.click(screen.getByLabelText('Options for B'));
     expect(screen.getByRole('menuitem', { name: /kick/i })).toHaveTextContent('Kick');
+    expect(screen.getByRole('menuitem', { name: /ban/i })).toHaveTextContent('Ban');
     expect(screen.getByRole('menuitem', { name: /report/i })).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /mute/i })).toBeInTheDocument();
     host.unmount();
@@ -42,5 +43,6 @@ describe('PlayerList', () => {
     render(<PlayerList ranked={false} />);
     fireEvent.click(screen.getByLabelText('Options for B'));
     expect(screen.getByRole('menuitem', { name: /vote kick/i })).toBeInTheDocument();
+    expect(screen.queryByRole('menuitem', { name: /ban/i })).not.toBeInTheDocument(); // host only
   });
 });

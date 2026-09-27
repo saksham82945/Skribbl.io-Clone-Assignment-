@@ -25,9 +25,17 @@ function PlayerMenu({ player, amHost, onClose }: { player: PlayerDTO; amHost: bo
   return (
     <div className="player-menu" ref={ref} role="menu">
       {amHost ? (
-        <button role="menuitem" onClick={act(() => confirm(`Kick ${player.name}?`) && socket.emit('kick_player', { playerId: player.id }))}>
-          🚪 Kick
-        </button>
+        <>
+          <button role="menuitem" onClick={act(() => confirm(`Kick ${player.name}? They can join again.`) && socket.emit('kick_player', { playerId: player.id }))}>
+            🚪 Kick
+          </button>
+          <button
+            role="menuitem"
+            onClick={act(() => confirm(`Ban ${player.name}? They won't be able to rejoin this room.`) && socket.emit('kick_player', { playerId: player.id, ban: true }))}
+          >
+            ⛔ Ban
+          </button>
+        </>
       ) : (
         <button role="menuitem" onClick={act(() => socket.emit('vote_kick', { playerId: player.id }))}>
           👎 Vote kick

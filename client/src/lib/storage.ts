@@ -35,6 +35,25 @@ export function loadProfile(): Profile {
 
 export const saveProfile = (p: Profile) => write(PROFILE_KEY, p);
 
+const DEVICE_KEY = 'scribble:device';
+let memoryDeviceId: string | null = null;
+
+/**
+ * A random id for this browser, kept across visits. The server uses it only so a
+ * host's "ban" also covers new tabs; it identifies nothing about the person.
+ */
+export function getDeviceId(): string {
+  const saved = read<string>(DEVICE_KEY) ?? memoryDeviceId;
+  if (saved) return saved;
+  const bytes = new Uint8Array(16);
+  if (typeof globalThis.crypto?.getRandomValues === 'function') crypto.getRandomValues(bytes);
+  else bytes.forEach((_, i) => (bytes[i] = Math.floor(Math.random() * 256)));
+  const id = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+  memoryDeviceId = id;
+  write(DEVICE_KEY, id);
+  return id;
+}
+
 export interface SavedSession {
   playerId: string;
   token: string;

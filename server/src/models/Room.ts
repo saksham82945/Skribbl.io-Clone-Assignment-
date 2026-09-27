@@ -8,7 +8,7 @@ import type { WordBank } from '../words/WordBank';
 import { Game } from './Game';
 import type { Player } from './Player';
 
-export type RemoveReason = 'left' | 'kicked' | 'timeout';
+export type RemoveReason = 'left' | 'kicked' | 'banned' | 'timeout';
 
 /**
  * A Room owns its players and settings, and knows how to talk to them.
@@ -22,6 +22,8 @@ export class Room {
   settings: RoomSettings;
   /** tokens of kicked players, so a stale tab can't silently rejoin */
   private readonly bannedTokens = new Set<string>();
+  /** browsers banned by the host: they can't rejoin this room, even from a new tab */
+  private readonly bannedDevices = new Set<string>();
   /** targetId -> ids of players voting to kick them */
   private readonly kickVotes = new Map<string, Set<string>>();
   /** targetId -> ids of players who reported them */
@@ -76,8 +78,13 @@ export class Room {
     return this.players.get(this.hostId);
   }
 
-  isBanned(token?: string) {
-    return !!token && this.bannedTokens.has(token);
+  /** Kicked seats can't be silently reclaimed (token); banned browsers can't come back at all (device). */
+  isBanned(token?: string, deviceId?: string) {
+    return (!!token && this.bannedTokens.has(token)) || this.isDeviceBanned(deviceId);
+  }
+
+  isDeviceBanned(deviceId?: string) {
+    return !!deviceId && this.bannedDevices.has(deviceId);
   }
 
   findByToken(token?: string): Player | undefined {
@@ -139,10 +146,12 @@ export class Room {
     this.kickVotes.delete(playerId);
     this.kickVotes.forEach((voters) => voters.delete(playerId));
 
-    if (reason === 'kicked') {
+    if (reason === 'kicked' || reason === 'banned') {
       this.bannedTokens.add(player.token);
+      if (reason === 'banned' && player.deviceId) this.bannedDevices.add(player.deviceId);
       if (player.socketId) {
-        this.emitToSocket(player.socketId, 'kicked', { reason: 'You were kicked from the room.' });
+        const why = reason === 'banned' ? 'You were banned from the room.' : 'You were kicked from the room.';
+        this.emitToSocket(player.socketId, 'kicked', { reason: why });
         this.io.sockets.sockets.get(player.socketId)?.leave(this.id);
       }
     }
@@ -162,6 +171,7 @@ export class Room {
     const text = {
       left: `${player.name} left the room`,
       kicked: `${player.name} was kicked`,
+      banned: `${player.name} was banned`,
       timeout: `${player.name} lost connection`,
     }[reason];
     this.emitAll('player_left', { playerId, players: this.playerDTOs() });

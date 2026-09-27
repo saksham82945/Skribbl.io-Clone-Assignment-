@@ -12,6 +12,8 @@ export class Player {
   hasGuessed = false;
   lastMessageAt = 0;
   disconnectTimer: NodeJS.Timeout | null = null;
+  /** Stable id of the player's browser (used for bans). */
+  deviceId?: string;
 
   constructor(
     public name: string,

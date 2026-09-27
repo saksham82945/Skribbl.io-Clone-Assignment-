@@ -13,7 +13,7 @@ import { canvasModel } from './canvasModel';
 import { socket } from './socket';
 import { saveLastDrawing } from './replay';
 import { sounds } from './sound';
-import { clearSession, loadProfile, saveProfile, saveSession, type Profile } from './storage';
+import { clearSession, getDeviceId, loadProfile, saveProfile, saveSession, type Profile } from './storage';
 
 interface State {
   profile: Profile;
@@ -88,7 +88,7 @@ function onJoined(res: AckResult<JoinResult>) {
 export function createRoom(settings?: Partial<RoomSettings>) {
   const { profile } = get();
   return new Promise<AckResult<JoinResult>>((resolve) =>
-    socket.emit('create_room', { hostName: profile.name, avatar: profile.avatar, settings }, (res) => {
+    socket.emit('create_room', { hostName: profile.name, avatar: profile.avatar, settings, deviceId: getDeviceId() }, (res) => {
       onJoined(res);
       resolve(res);
     }),
@@ -98,7 +98,7 @@ export function createRoom(settings?: Partial<RoomSettings>) {
 export function joinRoom(roomId: string, token?: string, spectator = false) {
   const { profile } = get();
   return new Promise<AckResult<JoinResult>>((resolve) =>
-    socket.emit('join_room', { roomId, playerName: profile.name, avatar: profile.avatar, token, spectator }, (res) => {
+    socket.emit('join_room', { roomId, playerName: profile.name, avatar: profile.avatar, token, spectator, deviceId: getDeviceId() }, (res) => {
       onJoined(res);
       resolve(res);
     }),
@@ -108,7 +108,7 @@ export function joinRoom(roomId: string, token?: string, spectator = false) {
 export function quickPlay() {
   const { profile } = get();
   return new Promise<AckResult<JoinResult>>((resolve) =>
-    socket.emit('quick_play', { playerName: profile.name, avatar: profile.avatar }, (res) => {
+    socket.emit('quick_play', { playerName: profile.name, avatar: profile.avatar, deviceId: getDeviceId() }, (res) => {
       onJoined(res);
       resolve(res);
     }),

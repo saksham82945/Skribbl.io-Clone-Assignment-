@@ -29,6 +29,11 @@ export function sanitizeName(name: unknown): string {
   return clean || `Player${Math.floor(Math.random() * 1000)}`;
 }
 
+/** Device ids are client-generated random strings; anything else is ignored. */
+export function sanitizeDeviceId(id: unknown): string | undefined {
+  return typeof id === 'string' && /^[A-Za-z0-9_-]{8,64}$/.test(id) ? id : undefined;
+}
+
 export function sanitizeText(text: unknown, max = 100): string {
   return String(text ?? '')
     .replace(/[\u0000-\u001f\u007f]/g, '')

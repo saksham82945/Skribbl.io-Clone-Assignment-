@@ -84,7 +84,7 @@ All values are clamped on the server, whatever the client sends (`utils/sanitize
 
 - **Must have:** all ✅
 - **Should have:** hints ✅, chat ✅, draw-time countdown ✅, private rooms ✅
-- **Nice to have:** word categories ✅, eraser ✅, kick/ban ✅ (host kick; a kicked tab can't rejoin with its seat token), votekick ✅, multiple languages for the word list ✅ (English, Español, Deutsch, Hinglish)
+- **Nice to have:** word categories ✅, eraser ✅, kick/ban ✅ (host **Kick** removes a player; host **Ban** also blocks that browser from rejoining the room), votekick ✅, multiple languages for the word list ✅ (English, Español, Deutsch, Hinglish)
 
 ### Bonus ideas
 
@@ -93,7 +93,7 @@ All values are clamped on the server, whatever the client sends (`utils/sanitize
 | OOP WebSocket server (`Room`, `Game`, `Player`, `MessageHandler`, …) | ✅ |
 | Room settings: draw time, rounds, word count, hints | ✅ |
 | Word modes: Normal, Hidden, Combination | ✅ |
-| Moderation: kick, ban, votekick, report | ✅ (plus a per-player **mute**, local to you) |
+| Moderation: kick, ban, votekick, report | ✅ player **⋯** menu: Kick / Ban (host), Vote kick, Report, plus a local-only **Mute** |
 | Custom word list | ✅ |
 | Avatars | ✅ (face + colour, 🎲 randomizer) |
 | Spectator mode | ✅ (**Watch** from the public list, or tick "Just watch" on an invite link) |
@@ -136,7 +136,7 @@ Click **Play!** and automatic players fill the room so you can play straight awa
 
 ## Testing
 
-**122 automated tests** run in CI on every push (`.github/workflows/ci.yml`: typecheck → test → build).
+**125 automated tests** run in CI on every push (`.github/workflows/ci.yml`: typecheck → test → build).
 
 | Suite | Kind | What it covers |
 |---|---|---|

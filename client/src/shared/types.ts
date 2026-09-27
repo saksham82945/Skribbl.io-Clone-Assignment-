@@ -194,9 +194,10 @@ export type AckResult<T> = ({ ok: true } & T) | { ok: false; error: string };
 export type Ack<T> = (res: AckResult<T>) => void;
 
 export interface ClientToServerEvents {
-  create_room: (p: { hostName: string; avatar: Avatar; settings?: Partial<RoomSettings> }, ack: Ack<JoinResult>) => void;
-  join_room: (p: { roomId: string; playerName: string; avatar: Avatar; token?: string; spectator?: boolean }, ack: Ack<JoinResult>) => void;
-  quick_play: (p: { playerName: string; avatar: Avatar }, ack: Ack<JoinResult>) => void;
+  /** `deviceId`: stable random id per browser, so a host's ban also covers new tabs. */
+  create_room: (p: { hostName: string; avatar: Avatar; settings?: Partial<RoomSettings>; deviceId?: string }, ack: Ack<JoinResult>) => void;
+  join_room: (p: { roomId: string; playerName: string; avatar: Avatar; token?: string; spectator?: boolean; deviceId?: string }, ack: Ack<JoinResult>) => void;
+  quick_play: (p: { playerName: string; avatar: Avatar; deviceId?: string }, ack: Ack<JoinResult>) => void;
   get_public_rooms: (ack: (rooms: PublicRoomInfo[]) => void) => void;
   leave_room: () => void;
   update_settings: (settings: Partial<RoomSettings>) => void;
@@ -212,7 +213,8 @@ export interface ClientToServerEvents {
   draw_undo: () => void;
   guess: (p: { text: string }) => void;
   chat: (p: { text: string }) => void;
-  kick_player: (p: { playerId: string }) => void;
+  /** Host only. `ban: true` also blocks that browser (and its seat token) from rejoining this room. */
+  kick_player: (p: { playerId: string; ban?: boolean }) => void;
   report_player: (p: { playerId: string; reason?: string }) => void;
   rate_drawing: (p: { like: boolean }) => void;
   vote_kick: (p: { playerId: string }) => void;

@@ -46,6 +46,22 @@ describe('Room: moderation', () => {
     expect(t.privately(target, 'kicked')).toHaveLength(1);
   });
 
+  it('ban blocks that browser from the room; kick only removes the seat', () => {
+    const t = makeRoom({ players: 4 });
+    const [, kicked, banned] = t.players;
+    kicked.deviceId = 'device-kicked-1';
+    banned.deviceId = 'device-banned-1';
+
+    t.room.removePlayer(kicked.id, 'kicked');
+    expect(t.room.isBanned(kicked.token)).toBe(true); // the old tab can't silently reclaim the seat
+    expect(t.room.isDeviceBanned('device-kicked-1')).toBe(false); // …but they may join again
+
+    t.room.removePlayer(banned.id, 'banned');
+    expect(t.room.isDeviceBanned('device-banned-1')).toBe(true); // not even from a new tab
+    expect(t.privately(banned, 'kicked')[0].reason).toMatch(/banned/);
+    expect(t.broadcast('chat_message').some((m) => m.text === 'P2 was banned')).toBe(true);
+  });
+
   it('reports are acknowledged privately and never announced to the room', () => {
     const t = makeRoom();
     const log = vi.spyOn(console, 'log').mockImplementation(() => {});
