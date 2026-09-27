@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Tool } from '../../../shared/types';
+import type { Tool } from '../shared/types';
 import { BoardOverlay } from '../components/BoardOverlay';
 import { Canvas } from '../components/Canvas';
 import { Chat } from '../components/Chat';

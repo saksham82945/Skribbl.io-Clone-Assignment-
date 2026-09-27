@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_SETTINGS } from '../../shared/types';
+import { DEFAULT_SETTINGS } from '../src/shared/types';
 import { effectiveHintCount, hintSchedule, maskWord, pickLetterToReveal } from '../src/utils/hints';
 import { sanitizeSettings } from '../src/utils/sanitize';
 import { drawerPoints, guesserPoints } from '../src/utils/scoring';

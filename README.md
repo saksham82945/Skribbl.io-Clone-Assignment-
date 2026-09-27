@@ -165,6 +165,8 @@ Express serves the React build from the same origin, so no CORS or extra config 
 - Set `CLIENT_ORIGIN=https://<your-frontend>` on the backend so CORS allows it.
 - Add an SPA rewrite (`/* → /index.html`) on the frontend host so invite links work.
 
+**Each folder is self-contained:** `client/` and `server/` import nothing from outside themselves, so either can be deployed on its own (e.g. `server/` as a Render web service and `client/` as a static site).
+
 **Platform notes:**
 - Game state is kept in memory, so a restart or redeploy ends games in progress, and the app runs as a single instance. To scale out you'd add Redis with `@socket.io/redis-adapter` and move room state to Redis.
 - Render's free tier sleeps after about 15 min idle, so the first request can take about 30 s.
@@ -172,8 +174,8 @@ Express serves the React build from the same origin, so no CORS or extra config 
 ## Project structure
 
 ```
-shared/types.ts            Socket event contract + DTOs, imported by client AND server
 server/src/
+  shared/types.ts          socket event contract + payload types (identical copy in client/src/shared/)
   app.ts                   Express + Socket.IO bootstrap, serves client/dist
   MessageHandler.ts        socket events → Room/Game calls (validation + permissions)
   RoomManager.ts           create / find / list rooms, quick-play matchmaking
@@ -187,6 +189,7 @@ server/src/
   utils/                   wordMatch, hints, scoring, sanitize (pure functions)
 server/tests/              unit tests (FakeIO) + socket integration tests
 client/src/
+  shared/types.ts          same contract as the server copy (a test keeps them identical)
   lib/store.ts             Zustand store; socket listeners → state; join/leave actions
   lib/canvasModel.ts       stroke list the canvas renders from (outside React)
   lib/floodFill.ts         bucket fill on raw pixels

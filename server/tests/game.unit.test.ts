@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { ChatMessage, GameOverPayload, GameStateDTO, RoundEndPayload, RoundStartPayload } from '../../shared/types';
+import type { ChatMessage, GameOverPayload, GameStateDTO, RoundEndPayload, RoundStartPayload } from '../src/shared/types';
 import { DEFAULT_TIMING } from '../src/config';
 import { join, makeRoom, startDrawing, WORD } from './helpers';
 

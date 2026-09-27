@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { Avatar, PlayerDTO } from '../../../shared/types';
+import type { Avatar, PlayerDTO } from '../shared/types';
 
 export class Player {
   readonly id = randomUUID();

@@ -1,7 +1,7 @@
 import type { AddressInfo } from 'node:net';
 import { io as ioClient, type Socket } from 'socket.io-client';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import type { ClientToServerEvents, DrawEvent, JoinResult, ServerToClientEvents } from '../../shared/types';
+import type { ClientToServerEvents, DrawEvent, JoinResult, ServerToClientEvents } from '../src/shared/types';
 import { BOT_DRAWINGS, BOT_WORDS } from '../src/bots/drawings';
 import { createApp } from '../src/app';
 

@@ -1,4 +1,4 @@
-import type { GameOverPayload, GameStateDTO, LeaderboardEntry, Phase, Point, Stroke, Tool, TurnEndReason } from '../../../shared/types';
+import type { GameOverPayload, GameStateDTO, LeaderboardEntry, Phase, Point, Stroke, Tool, TurnEndReason } from '../shared/types';
 import { MAX_POINTS_PER_MOVE, MAX_POINTS_PER_STROKE, MAX_STROKES, MIN_PLAYERS, type GameTiming } from '../config';
 import { effectiveHintCount, hintSchedule, maskWord, pickLetterToReveal } from '../utils/hints';
 import { clamp, sanitizeColor } from '../utils/sanitize';

@@ -1,4 +1,4 @@
-import { AVATAR_COLORS, AVATAR_EMOJIS } from '../../../shared/types';
+import { AVATAR_COLORS, AVATAR_EMOJIS } from '../shared/types';
 import { setProfile, useStore } from '../lib/store';
 import { Avatar } from './Avatar';
 

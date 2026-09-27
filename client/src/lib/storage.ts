@@ -1,4 +1,4 @@
-import { AVATAR_COLORS, AVATAR_EMOJIS, type Avatar } from '../../../shared/types';
+import { AVATAR_COLORS, AVATAR_EMOJIS, type Avatar } from '../shared/types';
 
 export interface Profile {
   name: string;

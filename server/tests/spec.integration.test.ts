@@ -5,7 +5,7 @@
 import type { AddressInfo } from 'node:net';
 import { io as ioClient, type Socket } from 'socket.io-client';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import type { ClientToServerEvents, JoinResult, ServerToClientEvents } from '../../shared/types';
+import type { ClientToServerEvents, JoinResult, ServerToClientEvents } from '../src/shared/types';
 import { createApp } from '../src/app';
 
 type Client = Socket<ServerToClientEvents, ClientToServerEvents>;

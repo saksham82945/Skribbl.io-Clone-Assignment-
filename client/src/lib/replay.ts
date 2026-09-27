@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Stroke } from '../../../shared/types';
+import type { Stroke } from '../shared/types';
 import { CanvasModel, canvasModel } from './canvasModel';
 
 /**

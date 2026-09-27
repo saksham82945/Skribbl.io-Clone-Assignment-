@@ -14,7 +14,7 @@
 
 **Core rule: the server holds all the state.** Clients send *intents* (for example "I guessed X" or "I drew these points"). The server checks them, updates state, and tells clients what happened. The secret word is never sent to a player who shouldn't see it.
 
-`shared/types.ts` defines every event name and payload once. Socket.IO's generic `Server<ClientToServerEvents, ServerToClientEvents>` then makes client/server mismatches a compile error.
+`shared/types.ts` defines every event name and payload. Socket.IO's generic `Server<ClientToServerEvents, ServerToClientEvents>` then makes client/server mismatches a compile error. The file lives in both packages (`server/src/shared/` and `client/src/shared/`), so each folder is self-contained and can be deployed on its own. `server/tests/sharedTypes.test.ts` fails if the two copies ever differ.
 
 ---
 
@@ -102,7 +102,7 @@ Socket.IO gives us rooms, reconnection, acks and automatic fallback to long-poll
   - All strings are sanitised and length-capped.
   - Chat is rate-limited to one message per 250 ms.
 
-Full event list: see `ClientToServerEvents` / `ServerToClientEvents` in `shared/types.ts`. It uses the event names from the assignment (`create_room`, `join_room`, `player_joined`, `player_left`, `start_game`, `game_state`, `round_start`, `word_chosen`, `round_end`, `game_over`, `draw_start`, `draw_move`, `draw_end`, `draw_data`, `canvas_clear`, `draw_undo`, `guess`, `guess_result`, `chat`, `chat_message`) plus a few extras (`canvas_state`, `player_ready`, `update_settings`, `kick_player`, `vote_kick`, `report_player`, `rate_drawing`, `quick_play`, `get_public_rooms`, `return_to_lobby`). The payloads match the brief: `game_state` carries `hints`, `round_end` carries `nextDrawer`, `game_over` carries `winner` (plus `winners` for ties), and a wrong guess sends `guess_result { correct: false }` to the guesser only.
+Full event list: see `ClientToServerEvents` / `ServerToClientEvents` in `server/src/shared/types.ts` (same file in `client/src/shared/`). It uses the event names from the assignment (`create_room`, `join_room`, `player_joined`, `player_left`, `start_game`, `game_state`, `round_start`, `word_chosen`, `round_end`, `game_over`, `draw_start`, `draw_move`, `draw_end`, `draw_data`, `canvas_clear`, `draw_undo`, `guess`, `guess_result`, `chat`, `chat_message`) plus a few extras (`canvas_state`, `player_ready`, `update_settings`, `kick_player`, `vote_kick`, `report_player`, `rate_drawing`, `quick_play`, `get_public_rooms`, `return_to_lobby`). The payloads match the brief: `game_state` carries `hints`, `round_end` carries `nextDrawer`, `game_over` carries `winner` (plus `winners` for ties), and a wrong guess sends `guess_result { correct: false }` to the guesser only.
 
 ## 3b. Automatic players (always a 4-player game)
 

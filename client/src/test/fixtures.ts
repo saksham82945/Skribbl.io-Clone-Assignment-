@@ -1,4 +1,4 @@
-import { DEFAULT_SETTINGS, type GameStateDTO, type PlayerDTO, type RoomStateDTO } from '../../../shared/types';
+import { DEFAULT_SETTINGS, type GameStateDTO, type PlayerDTO, type RoomStateDTO } from '../shared/types';
 import { useStore } from '../lib/store';
 
 export function player(id: string, extra: Partial<PlayerDTO> = {}): PlayerDTO {

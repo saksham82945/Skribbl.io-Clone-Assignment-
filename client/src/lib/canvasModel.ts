@@ -1,4 +1,4 @@
-import type { Point, Stroke } from '../../../shared/types';
+import type { Point, Stroke } from '../shared/types';
 
 export type CanvasChange = { type: 'full' } | { type: 'segment'; stroke: Stroke; from: number };
 type Listener = (change: CanvasChange) => void;

@@ -1,4 +1,4 @@
-import { AVATAR_COLORS, AVATAR_EMOJIS } from '../../../shared/types';
+import { AVATAR_COLORS, AVATAR_EMOJIS } from '../shared/types';
 import { Player } from '../models/Player';
 import type { Room } from '../models/Room';
 import { BOT_DRAWINGS, BOT_WORDS, type BotStroke } from './drawings';

@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { ChatKind, ChatMessage, PublicRoomInfo, RoomSettings, RoomStateDTO } from '../../../shared/types';
+import type { ChatKind, ChatMessage, PublicRoomInfo, RoomSettings, RoomStateDTO } from '../shared/types';
 import { BotController } from '../bots/BotController';
 import type { GameTiming } from '../config';
 import type { IOServer, ServerEvent, ServerEventArgs } from '../types';

@@ -1,4 +1,4 @@
-import type { Language } from '../../../shared/types';
+import type { Language } from '../shared/types';
 
 /**
  * The doodle library is keyed by English words. In other languages the bot is

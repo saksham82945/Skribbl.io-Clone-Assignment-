@@ -1,4 +1,4 @@
-import type { Avatar as AvatarT } from '../../../shared/types';
+import type { Avatar as AvatarT } from '../shared/types';
 
 export function Avatar({ avatar, size = 40 }: { avatar: AvatarT; size?: number }) {
   return (

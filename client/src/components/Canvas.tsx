@@ -1,5 +1,5 @@
 import { useEffect, useRef, type PointerEvent as ReactPointerEvent } from 'react';
-import type { Point, Stroke, Tool } from '../../../shared/types';
+import type { Point, Stroke, Tool } from '../shared/types';
 import { canvasModel as liveModel, type CanvasModel } from '../lib/canvasModel';
 import { floodFillPixels, hexToRgb } from '../lib/floodFill';
 import { socket } from '../lib/socket';

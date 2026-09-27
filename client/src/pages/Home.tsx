@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { AckResult, JoinResult, PublicRoomInfo } from '../../../shared/types';
-import { AVATAR_COLORS, AVATAR_EMOJIS } from '../../../shared/types';
+import type { AckResult, JoinResult, PublicRoomInfo } from '../shared/types';
+import { AVATAR_COLORS, AVATAR_EMOJIS } from '../shared/types';
 import { Avatar } from '../components/Avatar';
 import { ProfileForm } from '../components/ProfileForm';
 import { extractCode } from '../lib/roomCode';

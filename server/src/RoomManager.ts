@@ -1,4 +1,4 @@
-import type { PublicRoomInfo, RoomSettings } from '../../shared/types';
+import type { PublicRoomInfo, RoomSettings } from './shared/types';
 import type { GameTiming } from './config';
 import { Room } from './models/Room';
 import type { IOServer } from './types';

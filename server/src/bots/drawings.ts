@@ -1,4 +1,4 @@
-import type { Point, Tool } from '../../../shared/types';
+import type { Point, Tool } from '../shared/types';
 
 /**
  * Hand-made doodles the bots can draw, built from a few shape helpers.

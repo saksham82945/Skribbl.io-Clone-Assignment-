@@ -9,7 +9,7 @@ import type {
   GameStateDTO,
   JoinResult,
   ServerToClientEvents,
-} from '../../shared/types';
+} from '../src/shared/types';
 import { createApp } from '../src/app';
 
 type Client = Socket<ServerToClientEvents, ClientToServerEvents>;

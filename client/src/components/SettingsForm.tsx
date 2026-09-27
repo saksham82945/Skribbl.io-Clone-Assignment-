@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LANGUAGES, SETTINGS_LIMITS, WORD_CATEGORIES, type Language, type RoomSettings } from '../../../shared/types';
+import { LANGUAGES, SETTINGS_LIMITS, WORD_CATEGORIES, type Language, type RoomSettings } from '../shared/types';
 import { socket } from '../lib/socket';
 
 const range = ({ min, max }: { min: number; max: number }) => Array.from({ length: max - min + 1 }, (_, i) => min + i);

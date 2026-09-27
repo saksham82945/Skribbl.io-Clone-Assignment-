@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import type { RoomSettings } from '../../shared/types';
+import type { RoomSettings } from '../src/shared/types';
 import { DEFAULT_TIMING, type GameTiming } from '../src/config';
 import { Player } from '../src/models/Player';
 import { Room } from '../src/models/Room';

@@ -1,4 +1,4 @@
-import type { Tool } from '../../../shared/types';
+import type { Tool } from '../shared/types';
 import { socket } from '../lib/socket';
 
 export const COLORS = [

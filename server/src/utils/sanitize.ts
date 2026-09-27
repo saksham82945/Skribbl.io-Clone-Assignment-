@@ -10,7 +10,7 @@ import {
   type RoomSettings,
   type WordCategory,
   type WordMode,
-} from '../../../shared/types';
+} from '../shared/types';
 
 const HEX = /^#[0-9a-f]{6}$/i;
 

@@ -8,7 +8,7 @@ import type {
   RoomSettings,
   RoomStateDTO,
   RoundEndPayload,
-} from '../../../shared/types';
+} from '../shared/types';
 import { canvasModel } from './canvasModel';
 import { socket } from './socket';
 import { saveLastDrawing } from './replay';

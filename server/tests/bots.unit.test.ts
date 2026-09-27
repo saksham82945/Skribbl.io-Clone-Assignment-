@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { DEFAULT_SETTINGS, LANGUAGES, type DrawEvent, type Language } from '../../shared/types';
+import { DEFAULT_SETTINGS, LANGUAGES, type DrawEvent, type Language } from '../src/shared/types';
 import { BOT_WORDS } from '../src/bots/drawings';
 import { toEnglish, toLanguage } from '../src/bots/translations';
 import { WordBank } from '../src/words/WordBank';

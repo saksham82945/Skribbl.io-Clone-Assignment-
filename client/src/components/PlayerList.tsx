@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { PlayerDTO } from '../../../shared/types';
+import type { PlayerDTO } from '../shared/types';
 import { useMutes } from '../lib/mute';
 import { socket } from '../lib/socket';
 import { showToast, useStore } from '../lib/store';

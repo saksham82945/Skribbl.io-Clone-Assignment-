@@ -1,4 +1,4 @@
-import type { Ack, Avatar, JoinResult, Point } from '../../shared/types';
+import type { Ack, Avatar, JoinResult, Point } from './shared/types';
 import { MIN_PLAYERS } from './config';
 import { Player } from './models/Player';
 import type { Room } from './models/Room';

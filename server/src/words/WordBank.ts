@@ -1,4 +1,4 @@
-import type { Language, RoomSettings, WordCategory } from '../../../shared/types';
+import type { Language, RoomSettings, WordCategory } from '../shared/types';
 import wordsDe from './words.de.json';
 import wordsEs from './words.es.json';
 import wordsHi from './words.hi.json';

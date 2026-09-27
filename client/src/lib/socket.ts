@@ -1,5 +1,5 @@
 import { io, type Socket } from 'socket.io-client';
-import type { ClientToServerEvents, ServerToClientEvents } from '../../../shared/types';
+import type { ClientToServerEvents, ServerToClientEvents } from '../shared/types';
 
 export type ClientSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
 

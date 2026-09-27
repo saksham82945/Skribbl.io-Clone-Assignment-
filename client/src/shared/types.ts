@@ -1,6 +1,11 @@
 /**
- * Types and constants shared by the client and the server.
- * Both sides import this file, so the Socket.IO contract is checked at compile time.
+ * Types and constants shared by the client and the server: the Socket.IO event
+ * contract and every payload shape.
+ *
+ * There are two identical copies, server/src/shared/types.ts and
+ * client/src/shared/types.ts, so each folder is self-contained and can be
+ * deployed on its own. Edit one, then copy it over the other;
+ * server/tests/sharedTypes.test.ts fails if they ever differ.
  */
 
 export type Phase = 'lobby' | 'choosing' | 'drawing' | 'turn_end' | 'game_over';
