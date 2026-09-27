@@ -263,6 +263,9 @@ export class Game {
 
   /** Every chat line goes through here so the secret word can never leak. */
   handleMessage(player: Player, text: string) {
+    // Ignore anyone who is no longer in the room (e.g. an automatic player that left
+    // to make space for a real one while it still had a guess scheduled).
+    if (this.room.players.get(player.id) !== player) return;
     const now = Date.now();
     if (!player.isBot && now - player.lastMessageAt < this.timing.chatCooldownMs) {
       this.room.emitTo(player, 'chat_message', this.room.message('warning', 'Slow down! Message not sent.'));

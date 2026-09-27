@@ -156,13 +156,16 @@ Full event list: see `ClientToServerEvents` / `ServerToClientEvents` in `server/
 
 ## 6. Deployment
 
-- **Single Render service.** `npm run build` builds `client/dist` with Vite and bundles `server/dist/index.js` with esbuild. `npm start` runs Express, which serves the static build and Socket.IO on one port. Same origin means no CORS setup is needed.
-- **Vercel/Netlify** only suit the static frontend, because serverless functions can't keep WebSocket connections open. Pair them with a Render or Railway backend using `VITE_SERVER_URL` + `CLIENT_ORIGIN`.
+- **As deployed:** the frontend is on **Vercel** (https://skribbl-io-clone-assignment-client.vercel.app) and the Socket.IO backend is on **Render** (https://skribbl-io-clone-assignment.onrender.com).
+  - **Why split:** Vercel and Netlify serve static files and short-lived serverless functions, which can't keep WebSocket connections open. The backend needs a long-running process, so it runs on Render.
+  - **Frontend config:** `client/.env.production` gives the build the backend URL (`VITE_SERVER_URL`), and `client/vercel.json` rewrites every path to `index.html` so invite links work.
+  - **Backend config:** `CLIENT_ORIGIN` lists the frontend origin so CORS allows the Socket.IO handshake. Without it, the browser blocks the connection and the page stays on "Connecting to server…".
+- **Single-service alternative** (`render.yaml`): `npm run build` builds `client/dist` with Vite and bundles `server/dist/index.js` with esbuild. `npm start` runs Express, which serves the static build and Socket.IO on one port. Same origin means no CORS setup is needed.
 - **Single instance.** State is in memory, which keeps things simple. Horizontal scaling would need the Socket.IO Redis adapter plus sticky sessions (or WebSocket-only transport), and room state moved out of process memory.
 
 ## 7. Testing
 
-120 automated tests, run by `npm test` and in CI (`.github/workflows/ci.yml`).
+122 automated tests, run by `npm test` and in CI (`.github/workflows/ci.yml`).
 
 - **Server unit tests** (`server/tests/*.unit.test.ts`, `utils.test.ts`) drive `Room` and `Game` directly through a `FakeIO` that records every emit (`tests/helpers.ts`), with Vitest fake timers controlling the clock. They cover:
   - every phase transition, auto-pick, the hint schedule, time-up vs all-guessed, scoring order and the drawer's share

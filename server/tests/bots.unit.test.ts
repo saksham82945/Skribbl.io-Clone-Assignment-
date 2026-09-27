@@ -39,6 +39,19 @@ describe('Automatic players', () => {
     expect(t.bots.every((b) => b.score > 0)).toBe(true);
   });
 
+  it('say nothing after leaving the room, even with a guess already scheduled', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0.1); // every bot plans a correct guess
+    const t = roomWithBots();
+    t.game.start();
+    t.game.chooseWord(t.players[0].id, WORD);
+    const leaver = t.bots[0];
+    t.room.removePlayer(leaver.id, 'left'); // e.g. a real player took its seat
+    advanceUntil(() => t.broadcast('round_end').length > 0 || t.game.phase !== 'drawing');
+
+    expect(t.broadcast('guess_result').some((g) => g.playerId === leaver.id)).toBe(false);
+    expect(t.broadcast('chat_message').some((m) => m.playerId === leaver.id)).toBe(false);
+  });
+
   it('pick a word and draw a real doodle, stroke by stroke, on their turn', () => {
     const t = roomWithBots();
     t.game.start();
